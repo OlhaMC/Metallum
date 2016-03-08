@@ -9,12 +9,32 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    var bands: [Band]?
+    var members: [Member]?
+    var dataManager: NetworkManager?
 
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        dataManager = NetworkManager.sharedInstance
+        if dataManager == nil {
+            print("Error - network manager is nil")
+            return
+        }
+        dataManager?.downloadData(complerionHandler: { () -> Void in
+            self.bands = self.dataManager?.createBands(self.dataManager?.jsonDictionary)
+            if let someBands = self.bands {
+                for band in someBands {
+                    band.showBandInfo()
+                }
+            }
+        })
+   
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
