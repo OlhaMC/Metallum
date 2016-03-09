@@ -20,6 +20,8 @@ class BandsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 44.0
         dataManager = NetworkManager.sharedInstance
         if dataManager == nil {
             print("Error - network manager is nil")
@@ -27,11 +29,10 @@ class BandsViewController: UITableViewController {
         }
         dataManager?.downloadData(complerionHandler: {[unowned self] () -> Void in
             self.bands = self.dataManager?.createBands(self.dataManager?.jsonDictionary)
-            if let someBands = self.bands {
-                for band in someBands {
-                    band.showBandInfo()
-                }
-                self.tableView.reloadData()
+            if self.bands != nil {
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.tableView.reloadData()
+                })
             }
         })
         
@@ -64,8 +65,10 @@ class BandsViewController: UITableViewController {
     
     func configureTileCell(cell: BandCell, atIndexPath: NSIndexPath, forTableView: UITableView) {
         if let currentBand = bands?[atIndexPath.row] {
+            
             cell.bandName?.text = currentBand.name
-            cell.genreTypes?.text = currentBand.genres?.description
+            let genreString = currentBand.genres?.reduce("", combine: {$0! + "\($1), "})
+            cell.genreTypes?.text = genreString
             
             if let year = currentBand.formationYear {
                 cell.year?.text = "\(year)"
@@ -78,4 +81,5 @@ class BandsViewController: UITableViewController {
             cell.contentView.sizeToFit()
         }
     }
+    
 }

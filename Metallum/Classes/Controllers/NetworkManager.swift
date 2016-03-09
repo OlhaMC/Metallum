@@ -19,16 +19,16 @@ class NetworkManager {
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         config.timeoutIntervalForRequest = 30.0
         config.timeoutIntervalForResource = 60.0
-        config.HTTPAdditionalHeaders = ["X-Parse-Application-Id" : "G9xrl0w9ZEfthprEWmfpjaLvYoaj4Q9i27GpKr5K",
-                                        "X-Parse-REST-API-Key" : "OicKg3pFplcUgJOm8oNVKhdpzK7nv2h5MnR2xkJS",
-                                        "Content-Type" : "application/json"]
+        config.HTTPAdditionalHeaders = ["application-id" : "D65ECD64-92B7-4FC8-FF53-CC8CB9314200",
+                                        "secret-key" : "663FD35E-769A-3B6A-FF9D-7C3376D3C200",
+                                        "application-type" : "REST"]
         
         session = NSURLSession(configuration: config)
     }
     
     func downloadData(complerionHandler completion: ()->Void) {
         
-        let resourceURL = NSURL(string: "https://api.parse.com/1/classes/Band")
+        let resourceURL = NSURL(string: "https://api.backendless.com/v1/data/Band")
         let currentRequest = NSURLRequest(URL: resourceURL!)
         
         let task = session.dataTaskWithRequest(currentRequest) { (let data, let response, let error) -> Void in
@@ -67,15 +67,41 @@ class NetworkManager {
     }
     
     func createBands(jsonDictionary: NSDictionary?) -> [Band]? {
-        if let dictionaties = jsonDictionary?.objectForKey("results") as? [[String : AnyObject]] {
+        
+         if let dictionaties = jsonDictionary?.objectForKey("data") as? [[String : AnyObject]] {
                 var bands = [Band]()
                 for item in dictionaties {
                     let name = item["name"] as? String
                     let foundationYear = item["formationYear"] as? NSNumber
                     let shortInfo = item["shortDescription"] as? String
-                    let genres = item["genres"] as? [String]
-                //  let members = item["members"] as? [Member]
-                    let currentBand = Band(bandName: name, shortInfo: shortInfo, foundationYear: foundationYear, membersOfBand: [], genres: genres)
+                    let genrString = item["genres"] as? String
+                    let genArray = genrString?.componentsSeparatedByString(", ")
+                    
+                    let people = item["members"] as? [[String : AnyObject]]
+                    var bandMembers = [Member]()
+                    if let realPeople = people {
+                        for person in realPeople {
+                            let firstName = person["firstName"] as? String
+                            let lastName = person["lastName"] as? String
+                            let nickname = person["nickname"] as? String
+                            
+                            var birthDate = NSDate()
+                            let dateNumber = person["birthDate"] as? NSNumber
+                            if let doubleNumber = dateNumber {
+                                 birthDate = NSDate(timeIntervalSince1970: Double(doubleNumber)/1000.0)
+                            }
+                            
+                            let instrumentsString = person["instruments"] as? String
+                            let instrumentsArray = instrumentsString?.componentsSeparatedByString(", ")
+                            
+                            if let nickName = nickname {
+                                let currentMember = Member(name: firstName, lastName: lastName, nick: nickName, birthday: birthDate, bandInstruments: instrumentsArray)
+                                bandMembers.append(currentMember)
+                            }
+                        }
+                    }
+                    
+                    let currentBand = Band(bandName: name, shortInfo: shortInfo, foundationYear: foundationYear, membersOfBand: bandMembers, genres: genArray)
                     if let newBand = currentBand {
                         bands.append(newBand)
                     }
@@ -85,8 +111,6 @@ class NetworkManager {
         return nil
     }
     
-    
-    
-    
+  
         
 }

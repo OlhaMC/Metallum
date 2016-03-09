@@ -38,8 +38,13 @@ class Band {
     }
     
     func showBandInfo() {
-        if let name = self.name, year = self.formationYear, genre = self.genres {
-            print("\nBand name: \(name) \nYear of foudation: \(year) \nGenres: \(genre)")
+        var membersString = ""
+        for member in members {
+            membersString += "\(member.nickName), "
+        }
+        let genreString = genres?.reduce("", combine: {$0! + "\($1), "})
+        if let name = self.name, year = self.formationYear {
+            print("\nBand name: \(name) \nYear of foudation: \(year) \nGenres: \(genreString ?? "N/A") \nMembers: \(membersString)")
         }
     }
     
