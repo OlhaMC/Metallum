@@ -8,15 +8,14 @@
 
 import Foundation
 
-class Member {
+final class Member {
     let firstName: String?
     let lastName: String?
     let nickName: String
     let birthDate: NSDate
     let instruments: [String]?
     
-    init (name: String?, lastName: String?, nick: String, birthday: NSDate, bandInstruments: [String]?) {
-        
+    init(name: String?, lastName: String?, nick: String, birthday: NSDate, bandInstruments: [String]?) {
         firstName = name
         self.lastName = lastName
         nickName = nick

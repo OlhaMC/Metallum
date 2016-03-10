@@ -7,10 +7,9 @@
 //
 
 import Foundation
-
 import UIKit
 
-class BandsViewController: UITableViewController {
+final class BandsViewController: UITableViewController {
 
     var bands: [Band]?
     var members: [Member]?
@@ -38,8 +37,6 @@ class BandsViewController: UITableViewController {
         
     }
     
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         print("Memory warning. Need to handle.")
@@ -57,15 +54,12 @@ class BandsViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("BandCell", forIndexPath: indexPath) as? BandCell
-        
         configureTileCell(cell!, atIndexPath:indexPath, forTableView:tableView)
-        
         return cell!;
     }
     
     func configureTileCell(cell: BandCell, atIndexPath: NSIndexPath, forTableView: UITableView) {
         if let currentBand = bands?[atIndexPath.row] {
-            
             cell.bandName?.text = currentBand.name
             let genreString = currentBand.genres?.reduce("", combine: {$0! + "\($1), "})
             cell.genreTypes?.text = genreString

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class BandCell: UITableViewCell {
+final class BandCell: UITableViewCell {
     
     @IBOutlet var bandName: UILabel?
     @IBOutlet var genreTypes: UILabel?
@@ -18,7 +18,6 @@ class BandCell: UITableViewCell {
     @IBOutlet var shortTextDescription: UILabel?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
     

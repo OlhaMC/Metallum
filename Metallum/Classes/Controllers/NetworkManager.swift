@@ -8,7 +8,7 @@
 
 import Foundation
 
-class NetworkManager {
+final class NetworkManager {
     
     static let sharedInstance = NetworkManager()
     
@@ -27,7 +27,6 @@ class NetworkManager {
     }
     
     func downloadData(complerionHandler completion: ()->Void) {
-        
         let resourceURL = NSURL(string: "https://api.backendless.com/v1/data/Band")
         let currentRequest = NSURLRequest(URL: resourceURL!)
         
@@ -67,7 +66,6 @@ class NetworkManager {
     }
     
     func createBands(jsonDictionary: NSDictionary?) -> [Band]? {
-        
          if let dictionaties = jsonDictionary?.objectForKey("data") as? [[String : AnyObject]] {
                 var bands = [Band]()
                 for item in dictionaties {

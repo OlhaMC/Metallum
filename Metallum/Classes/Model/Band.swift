@@ -8,23 +8,14 @@
 
 import Foundation
 
-enum Instruments: String {
-    case LeadVocals, BackingVocals, LeadGuitar, RhythmGuitar, BassGuitar, Drums, Keyboards
-}
-
-enum Genres: String {
-    case BlackMetal, DeathMetal, DoomMetal, TrashMetal
-    case IndustrialMetal, SymphonicMetal, BlackenedDeathMetal
-}
-
-class Band {
+final class Band {
     let name: String?
     var shortDescription: String?
     let formationYear: NSNumber?
     var members: [Member]
     var genres: [String]?
     
-    init? (bandName: String?, shortInfo: String?, foundationYear: NSNumber?, membersOfBand: [Member], genres: [String]?) {
+    init?(bandName: String?, shortInfo: String?, foundationYear: NSNumber?, membersOfBand: [Member], genres: [String]?) {
         name = bandName
         shortDescription = shortInfo
         formationYear = foundationYear
