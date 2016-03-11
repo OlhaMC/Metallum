@@ -29,11 +29,11 @@ final class NetworkManager {
         if let resourceURL = resourceURL {
             let currentRequest = NSURLRequest(URL: resourceURL)
             
-            let task = session.dataTaskWithRequest(currentRequest) {[unowned self] (let data, let response, let error) -> Void in
+            let task = session.dataTaskWithRequest(currentRequest) {[weak self] (let data, let response, let error) -> Void in
                 if let httpResponse = response as? NSHTTPURLResponse {
                     if httpResponse.statusCode == 200 {
                         if let data = data {
-                            let jsonDictionary = self.parseJSONFromData(data)
+                            let jsonDictionary = self!.parseJSONFromData(data)
                             completion(jsonDictionary: jsonDictionary)
                         }
                     } else {

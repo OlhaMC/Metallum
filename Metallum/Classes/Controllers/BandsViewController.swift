@@ -21,16 +21,16 @@ final class BandsViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44.0
         
-        NetworkManager.sharedInstance.downloadData {[unowned self] (jsonDictionary) -> Void in
+        NetworkManager.sharedInstance.downloadData {[weak self] (jsonDictionary) -> Void in
             if let jsonDictionaries = jsonDictionary?.objectForKey("data") as? [[String : AnyObject]] {
                 for item in jsonDictionaries {
                     let band = Band(jsonDictionary: item)
                     if let band = band {
-                        self.bands.append(band)
+                        self!.bands.append(band)
                     }
                 }
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.tableView.reloadData()
+                    self!.tableView.reloadData()
                 })
             }
         }
@@ -62,6 +62,4 @@ final class BandsViewController: UITableViewController {
         cell.numberOfMembers?.text = "\(band.members.count)"
         cell.shortTextDescription?.text = band.shortDescription
     }
-    
-    
 }

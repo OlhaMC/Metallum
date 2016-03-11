@@ -8,24 +8,52 @@
 
 import Foundation
 
-final class Member: CustomStringConvertible {
-    var firstName: String?
-    var lastName: String?
-    let nickName: String
-    let birthDate: NSDate
+final class Member {
+    
+    var firstName = ""
+    var lastName = ""
+    var nickName = ""
+    var birthDate = NSDate()
     var instruments = [String]()
+    
+    init?(jsonDictionary: [String : AnyObject]?) {
+        if let jsonDictionary = jsonDictionary {
+            let firstName = jsonDictionary["firstName"] as? String
+            let lastName = jsonDictionary["lastName"] as? String
+            let nickname = jsonDictionary["nickname"] as? String
+            
+            let instrumentsString = jsonDictionary["instruments"] as? String
+            let instrumentsArray = instrumentsString?.componentsSeparatedByString(", ")
+            
+            let dateNumber = jsonDictionary["birthDate"] as? NSNumber
+            if let dateNumber = dateNumber {
+                birthDate = NSDate(timeIntervalSince1970: Double(dateNumber)/1000.0)
+            }
+            
+            if let firstName = firstName {
+                self.firstName = firstName
+            }
+            if let lastName = lastName {
+                self.lastName = lastName
+            }
+            if let nickname = nickname {
+                nickName = nickname
+            } else {
+                return nil
+            }
+            if let instrumentsArray = instrumentsArray {
+                instruments = instrumentsArray
+            }
+        } else {
+            return nil
+        }
+    }
+}
+
+extension Member: CustomStringConvertible {
+    
     var description: String {
         let instrumentsString = instruments.reduce("", combine: {$0 + "\($1), "})
         return "\nName: \(firstName) \nLastName: \(lastName) \nNick: \(nickName) \nInstrument: \(instrumentsString ?? "N/A") \nBirthday: \(birthDate)"
-    }
-    
-    init(name: String?, lastName: String?, nick: String, birthday: NSDate, bandInstruments: [String]?) {
-        firstName = name
-        self.lastName = lastName
-        nickName = nick
-        birthDate = birthday
-        if let bandInstruments = bandInstruments {
-            instruments = bandInstruments
-        }
     }
 }
