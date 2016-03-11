@@ -11,30 +11,29 @@ import UIKit
 
 final class BandsViewController: UITableViewController {
 
-    var bands: [Band]?
-    var members: [Member]?
-    var dataManager: NetworkManager?
+    var bands = [Band]()
     
     //MARK: - Life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 44.0
-        dataManager = NetworkManager.sharedInstance
-        if dataManager == nil {
-            print("Error - network manager is nil")
-            return
-        }
-        dataManager?.downloadData(complerionHandler: {[unowned self] () -> Void in
-            self.bands = self.dataManager?.createBands(self.dataManager?.jsonDictionary)
-            if self.bands != nil {
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 44.0
+        
+        NetworkManager.sharedInstance.downloadData {[unowned self] (jsonDictionary) -> Void in
+            if let jsonDictionaries = jsonDictionary?.objectForKey("data") as? [[String : AnyObject]] {
+                for item in jsonDictionaries {
+                    let band = Band(jsonDictionary: item)
+                    if let band = band {
+                        self.bands.append(band)
+                    }
+                }
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self.tableView.reloadData()
                 })
             }
-        })
-        
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -45,35 +44,24 @@ final class BandsViewController: UITableViewController {
     //MARK: - UITableViewDataSource
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let bandNumb = bands?.count {
-            return bandNumb
-        } else {
-          return 0
-        }
+        return bands.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("BandCell", forIndexPath: indexPath) as? BandCell
-        configureTileCell(cell!, atIndexPath:indexPath, forTableView:tableView)
-        return cell!;
+        let cell = tableView.dequeueReusableCellWithIdentifier(String(BandTableViewCell), forIndexPath: indexPath) as! BandTableViewCell
+        configureBandTableViewCell(cell, atIndexPath:indexPath, forTableView:tableView)
+        return cell;
     }
     
-    func configureTileCell(cell: BandCell, atIndexPath: NSIndexPath, forTableView: UITableView) {
-        if let currentBand = bands?[atIndexPath.row] {
-            cell.bandName?.text = currentBand.name
-            let genreString = currentBand.genres?.reduce("", combine: {$0! + "\($1), "})
-            cell.genreTypes?.text = genreString
-            
-            if let year = currentBand.formationYear {
-                cell.year?.text = "\(year)"
-            } else {
-                cell.year?.text = "N/A"
-            }
-            
-            cell.numberOfMembers?.text = "\(currentBand.members.count)"
-            cell.shortTextDescription?.text = currentBand.shortDescription
-            cell.contentView.sizeToFit()
-        }
+    func configureBandTableViewCell(cell: BandTableViewCell, atIndexPath: NSIndexPath, forTableView: UITableView) {
+        let band = bands[atIndexPath.row]
+        cell.bandName?.text = band.name
+        let genres = band.genres.reduce("", combine: {$0 + "\($1), "})
+        cell.genreTypes?.text = genres
+        cell.year?.text = "\(band.formationYear)"
+        cell.numberOfMembers?.text = "\(band.members.count)"
+        cell.shortTextDescription?.text = band.shortDescription
     }
+    
     
 }

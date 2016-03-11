@@ -8,23 +8,24 @@
 
 import Foundation
 
-final class Member {
-    let firstName: String?
-    let lastName: String?
+final class Member: CustomStringConvertible {
+    var firstName: String?
+    var lastName: String?
     let nickName: String
     let birthDate: NSDate
-    let instruments: [String]?
+    var instruments = [String]()
+    var description: String {
+        let instrumentsString = instruments.reduce("", combine: {$0 + "\($1), "})
+        return "\nName: \(firstName) \nLastName: \(lastName) \nNick: \(nickName) \nInstrument: \(instrumentsString ?? "N/A") \nBirthday: \(birthDate)"
+    }
     
     init(name: String?, lastName: String?, nick: String, birthday: NSDate, bandInstruments: [String]?) {
         firstName = name
         self.lastName = lastName
         nickName = nick
         birthDate = birthday
-        instruments = bandInstruments
-    }
-    
-    func showMemberInfo() {
-        let instrumString = instruments?.reduce("", combine: {$0! + "\($1), "})
-        print("\nName: \(firstName) \nLastName: \(lastName) \nNick: \(nickName) \nInstrument: \(instrumString ?? "N/A") \nBirthday: \(birthDate)")
+        if let bandInstruments = bandInstruments {
+            instruments = bandInstruments
+        }
     }
 }
