@@ -26,7 +26,7 @@ final class BandsViewController: UITableViewController {
                 for item in jsonDictionaries {
                     let band = Band(jsonDictionary: item)
                     if let band = band {
-                        self!.bands.append(band)
+                        self?.bands.append(band)
                     }
                 }
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
