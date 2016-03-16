@@ -24,8 +24,7 @@ final class NetworkManager {
         session = NSURLSession(configuration: configuration)
     }
     
-    func downloadData(completionHandler completion: (jsonDictionary: NSDictionary?)->Void) {
-        let resourceURL = NSURL(string: "https://api.backendless.com/v1/data/Band")
+    func downloadDataFromURL(resourceURL: NSURL?, completionHandler completion: (jsonDictionary: NSDictionary?)->Void) {
         if let resourceURL = resourceURL {
             let currentRequest = NSURLRequest(URL: resourceURL)
             
@@ -52,6 +51,7 @@ final class NetworkManager {
         do {
             let jsonDictionary = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
             if let jsonDictionary = jsonDictionary as? NSDictionary {
+               // print(jsonDictionary)
                 return jsonDictionary
             }
         } catch {

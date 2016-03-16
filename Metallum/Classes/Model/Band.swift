@@ -15,6 +15,8 @@ final class Band {
     var formationYear = 0
     var members = [Member]()
     var genres = [String]()
+    var albums = [Album]()
+    var albumsIds = ""
     
     init?(jsonDictionary: [String : AnyObject]?) {
         if let jsonDictionary = jsonDictionary {

@@ -11,9 +11,9 @@ import UIKit
 
 final class BandTableViewCell: UITableViewCell {
     
-    @IBOutlet var bandName: UILabel?
-    @IBOutlet var genreTypes: UILabel?
-    @IBOutlet var year: UILabel?
-    @IBOutlet var numberOfMembers: UILabel?
-    @IBOutlet var shortTextDescription: UILabel?
+    @IBOutlet weak var bandName: UILabel?
+    @IBOutlet weak var genreTypes: UILabel?
+    @IBOutlet weak var year: UILabel?
+    @IBOutlet weak var numberOfMembers: UILabel?
+    @IBOutlet weak var shortTextDescription: UILabel?
 }
