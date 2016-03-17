@@ -36,6 +36,25 @@ final class Band {
                 }
             }
             
+            let albumsDirectoryURL = NSURL(string: "https://api.backendless.com/v1/data/Album")
+            let albumIDsString = jsonDictionary["albums"] as? String
+            let albumIDsArray = albumIDsString?.componentsSeparatedByString(", ")
+            if let albumIDsArray = albumIDsArray {
+                for albumID in albumIDsArray {
+                    let albumURL = albumsDirectoryURL?.URLByAppendingPathComponent(albumID)
+                    if let albumURL = albumURL {
+                        NetworkManager.sharedInstance.downloadDataFromURL(albumURL, completionHandler: {[weak self] (jsonDictionary) -> Void in
+                            if let jsonDictionary = jsonDictionary as? [String : AnyObject] {
+                                let album = Album(jsonDictionary: jsonDictionary)
+                                if let album = album {
+                                    self?.albums.append(album)
+                                }
+                            }
+                        })
+                    }
+                }
+            }
+            
             if let bandName = bandName {
                 name = bandName
             } else {

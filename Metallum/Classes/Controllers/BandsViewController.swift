@@ -23,10 +23,9 @@ final class BandsViewController: UITableViewController {
         title = "Bands"
         
         let bandsURL = NSURL(string: "https://api.backendless.com/v1/data/Band")
-        let albumsURL = NSURL(string: "https://api.backendless.com/v1/data/Album")
         
-        if let bandsURL = bandsURL, albumsURL = albumsURL {
-            createBandsUsingDataFromURL(bandsURL, albumsURL: albumsURL)
+        if let bandsURL = bandsURL {
+            createBandsUsingDataFromURL(bandsURL)
         }
         
     }
@@ -60,7 +59,7 @@ final class BandsViewController: UITableViewController {
     
     //MARK: - Create contents for BandsTableVeiw
     
-    func createBandsUsingDataFromURL(bandsURL: NSURL, albumsURL: NSURL) {
+    func createBandsUsingDataFromURL(bandsURL: NSURL) {
         NetworkManager.sharedInstance.downloadDataFromURL(bandsURL) {[weak self] (jsonDictionary) -> Void in
             if let jsonDictionaries = jsonDictionary?.objectForKey("data") as? [[String : AnyObject]] {
                 for item in jsonDictionaries {
@@ -69,39 +68,12 @@ final class BandsViewController: UITableViewController {
                         self?.bands.append(band)
                     }
                 }
-                if let bands = self?.bands {
-                    self?.createAlbumsForBands(bands, albumsURL: albumsURL)
-                }
-            }
-        }
-    }
-    
-    func createAlbumsForBands(bands: [Band], albumsURL: NSURL) {
-        NetworkManager.sharedInstance.downloadDataFromURL(albumsURL) {[weak self] (jsonDictionary) -> Void in
-            if let jsonDictionaries = jsonDictionary?.objectForKey("data") as? [[String : AnyObject]] {
-                var albumsArray = [Album]()
-                for item in jsonDictionaries {
-                    let album = Album(jsonDictionary: item)
-                    if let album = album {
-                        albumsArray.append(album)
-                    }
-                }
-                
-                for band in bands {
-                    for album in albumsArray {
-                        if band.albumsIds.containsString(album.objectId) {
-                            band.albums.append(album)
-                        }
-                    }
-                }
-                
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self!.tableView.reloadData()
                 })
             }
         }
     }
-    
     
     //MARK: - UITableViewDelegate
     
