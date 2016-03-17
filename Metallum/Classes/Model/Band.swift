@@ -64,7 +64,7 @@ extension Band: CustomStringConvertible {
             membersString += "\(member.nickName), "
         }
         let genreString = genres.reduce("", combine: {$0 + "\($1), "})
-        let infoString = "\nBand name: \(name) \nYear of foudation: \(formationYear) \nGenres: \(genreString ?? "N/A") \nMembers: \(membersString)"
+        let infoString = "\nBand name: \(name) \nYear of foundation: \(formationYear) \nGenres: \(genreString ?? "N/A") \nMembers: \(membersString)"
         return infoString
     }
 }

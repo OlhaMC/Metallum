@@ -20,6 +20,7 @@ final class BandsViewController: UITableViewController {
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44.0
+        title = "Bands"
         
         let bandsURL = NSURL(string: "https://api.backendless.com/v1/data/Band")
         let albumsURL = NSURL(string: "https://api.backendless.com/v1/data/Album")

@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xhD-pE-BRb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Xx4-Aa-ynt">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="ZKp-HV-KLw">
+            <objects>
+                <navigationController id="Xx4-Aa-ynt" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="w5i-xt-fLf">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="24"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="xhD-pE-BRb" kind="relationship" relationship="rootViewController" id="4ah-mY-S62"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jvB-dI-C0H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-86" y="132"/>
+        </scene>
         <!--Bands View Controller-->
         <scene sceneID="iEa-DY-FiC">
             <objects>
@@ -15,7 +36,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BandTableViewCell" id="QDj-Z3-zec" customClass="BandTableViewCell" customModule="Metallum" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="600" height="134"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="134"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QDj-Z3-zec" id="Jx9-1M-Rsc">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="133"/>
@@ -130,10 +151,11 @@
                             <outlet property="delegate" destination="xhD-pE-BRb" id="mby-J9-hlV"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="TSb-0j-X5c"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XyU-ta-EJ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="688" y="132"/>
+            <point key="canvasLocation" x="654" y="132"/>
         </scene>
         <!--Detailed Info View Controller-->
         <scene sceneID="AmM-NS-XGB">
@@ -145,7 +167,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InfoTableViewCell" id="U5p-Q7-r5h" customClass="InfoTableViewCell" customModule="Metallum" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="50" width="600" height="74"/>
+                                <rect key="frame" x="0.0" y="114" width="600" height="74"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U5p-Q7-r5h" id="MXv-IC-cr4">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="73"/>
@@ -164,19 +186,19 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zUm-6n-EYl">
-                                            <rect key="frame" x="80" y="29" width="28" height="18"/>
+                                            <rect key="frame" x="83" y="29" width="28" height="18"/>
                                             <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="14"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genres:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y5i-lV-G8F">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="Genres:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y5i-lV-G8F">
                                             <rect key="frame" x="8" y="47" width="46" height="18"/>
                                             <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="14"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="751" text="types of genres" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="npu-wZ-JmU">
-                                            <rect key="frame" x="80" y="47" width="512" height="18"/>
+                                            <rect key="frame" x="62" y="47" width="530" height="18"/>
                                             <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="14"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -185,7 +207,7 @@
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="ck7-Tc-l3i" secondAttribute="trailing" constant="8" id="10V-Gj-gQU"/>
                                         <constraint firstItem="SWQ-BJ-Q1f" firstAttribute="top" secondItem="ck7-Tc-l3i" secondAttribute="bottom" id="5Tl-MS-AFB"/>
-                                        <constraint firstItem="npu-wZ-JmU" firstAttribute="leading" secondItem="y5i-lV-G8F" secondAttribute="trailing" constant="26" id="5fQ-wE-4ll"/>
+                                        <constraint firstItem="npu-wZ-JmU" firstAttribute="leading" secondItem="y5i-lV-G8F" secondAttribute="trailing" constant="8" id="5fQ-wE-4ll"/>
                                         <constraint firstAttribute="trailing" secondItem="npu-wZ-JmU" secondAttribute="trailing" constant="8" id="CAi-CL-qNv"/>
                                         <constraint firstItem="SWQ-BJ-Q1f" firstAttribute="leading" secondItem="MXv-IC-cr4" secondAttribute="leading" constant="8" id="MLX-B2-QJ3"/>
                                         <constraint firstItem="ck7-Tc-l3i" firstAttribute="leading" secondItem="MXv-IC-cr4" secondAttribute="leading" constant="8" id="QMF-xe-DyW"/>
@@ -195,7 +217,7 @@
                                         <constraint firstAttribute="bottom" secondItem="npu-wZ-JmU" secondAttribute="bottom" constant="8" id="ia3-AW-SPo"/>
                                         <constraint firstItem="ck7-Tc-l3i" firstAttribute="top" secondItem="MXv-IC-cr4" secondAttribute="top" constant="8" id="jxi-Lk-OTJ"/>
                                         <constraint firstItem="y5i-lV-G8F" firstAttribute="top" secondItem="SWQ-BJ-Q1f" secondAttribute="bottom" id="q9B-Pe-MEx"/>
-                                        <constraint firstItem="zUm-6n-EYl" firstAttribute="leading" secondItem="SWQ-BJ-Q1f" secondAttribute="trailing" constant="5" id="zVf-v1-ugY"/>
+                                        <constraint firstItem="zUm-6n-EYl" firstAttribute="leading" secondItem="SWQ-BJ-Q1f" secondAttribute="trailing" constant="8" id="zVf-v1-ugY"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -205,7 +227,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemberTableViewCell" rowHeight="57" id="sde-ra-Q40" customClass="MemberTableViewCell" customModule="Metallum" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="124" width="600" height="57"/>
+                                <rect key="frame" x="0.0" y="188" width="600" height="57"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sde-ra-Q40" id="ufy-oI-drK">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="56"/>
@@ -262,7 +284,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AlbumTableViewCell" rowHeight="42" id="Omc-ZI-KAq" customClass="AlbumTableViewCell" customModule="Metallum" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="181" width="600" height="42"/>
+                                <rect key="frame" x="0.0" y="245" width="600" height="42"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Omc-ZI-KAq" id="QEq-bH-f2Z">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="41"/>
@@ -289,45 +311,42 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="lBd-5G-33h" firstAttribute="top" secondItem="QEq-bH-f2Z" secondAttribute="top" constant="8" id="C5n-sB-ip0"/>
-                                        <constraint firstItem="lBd-5G-33h" firstAttribute="top" secondItem="QEq-bH-f2Z" secondAttribute="top" constant="8" id="H9W-V7-vrz"/>
-                                        <constraint firstItem="IK7-yg-0wU" firstAttribute="top" secondItem="lBd-5G-33h" secondAttribute="bottom" constant="-20" id="MS1-Vl-Rrn"/>
-                                        <constraint firstItem="IK7-yg-0wU" firstAttribute="top" secondItem="lBd-5G-33h" secondAttribute="bottom" constant="-20" id="OWT-l7-C6W"/>
                                         <constraint firstItem="roH-Gx-1Tc" firstAttribute="centerY" secondItem="QEq-bH-f2Z" secondAttribute="centerY" constant="-1.5" id="P8x-U6-LfZ"/>
-                                        <constraint firstItem="roH-Gx-1Tc" firstAttribute="top" secondItem="lBd-5G-33h" secondAttribute="bottom" constant="-20" id="Qzm-Is-H69"/>
-                                        <constraint firstItem="lBd-5G-33h" firstAttribute="top" secondItem="QEq-bH-f2Z" secondAttribute="top" constant="8" id="ZJC-bZ-x3J"/>
                                         <constraint firstAttribute="trailing" secondItem="roH-Gx-1Tc" secondAttribute="trailing" constant="8" id="ZK8-Mg-gR9"/>
-                                        <constraint firstItem="roH-Gx-1Tc" firstAttribute="top" secondItem="lBd-5G-33h" secondAttribute="bottom" constant="-20" id="aLn-0t-Apd"/>
                                         <constraint firstAttribute="bottom" secondItem="lBd-5G-33h" secondAttribute="bottom" constant="8" id="idE-yc-Gvu"/>
                                         <constraint firstItem="lBd-5G-33h" firstAttribute="leading" secondItem="QEq-bH-f2Z" secondAttribute="leading" constant="8" id="izJ-Ds-2An"/>
                                         <constraint firstItem="IK7-yg-0wU" firstAttribute="centerY" secondItem="QEq-bH-f2Z" secondAttribute="centerY" constant="-1.5" id="j5d-1C-Ooz"/>
-                                        <constraint firstAttribute="bottom" secondItem="IK7-yg-0wU" secondAttribute="bottom" constant="13" id="kAo-AG-DII"/>
                                         <constraint firstItem="roH-Gx-1Tc" firstAttribute="leading" secondItem="IK7-yg-0wU" secondAttribute="trailing" constant="8" id="pNC-us-pnp"/>
-                                        <constraint firstItem="roH-Gx-1Tc" firstAttribute="leading" secondItem="IK7-yg-0wU" secondAttribute="trailing" constant="8" id="q8a-v9-FXw"/>
-                                        <constraint firstItem="lBd-5G-33h" firstAttribute="leading" secondItem="QEq-bH-f2Z" secondAttribute="leading" constant="8" id="r8W-BZ-N5y"/>
-                                        <constraint firstItem="lBd-5G-33h" firstAttribute="leading" secondItem="QEq-bH-f2Z" secondAttribute="leading" constant="8" id="rHM-Yu-ErI"/>
-                                        <constraint firstItem="IK7-yg-0wU" firstAttribute="leading" secondItem="QEq-bH-f2Z" secondAttribute="leading" constant="504" id="wYK-gq-5Wf"/>
-                                        <constraint firstItem="IK7-yg-0wU" firstAttribute="leading" secondItem="QEq-bH-f2Z" secondAttribute="leading" constant="504" id="xJY-hc-frC"/>
                                     </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="H9W-V7-vrz"/>
-                                            <exclude reference="ZJC-bZ-x3J"/>
-                                            <exclude reference="r8W-BZ-N5y"/>
-                                            <exclude reference="rHM-Yu-ErI"/>
-                                            <exclude reference="MS1-Vl-Rrn"/>
-                                            <exclude reference="OWT-l7-C6W"/>
-                                            <exclude reference="kAo-AG-DII"/>
-                                            <exclude reference="wYK-gq-5Wf"/>
-                                            <exclude reference="xJY-hc-frC"/>
-                                            <exclude reference="Qzm-Is-H69"/>
-                                            <exclude reference="aLn-0t-Apd"/>
-                                            <exclude reference="q8a-v9-FXw"/>
-                                        </mask>
-                                    </variation>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="albumName" destination="lBd-5G-33h" id="VsF-BJ-xpN"/>
                                     <outlet property="yearReleased" destination="roH-Gx-1Tc" id="iZs-ut-3O5"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SectionHeaderTableViewCell" rowHeight="42" id="Lkc-LK-udY" customClass="SectionHeaderTableViewCell" customModule="Metallum" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="287" width="600" height="42"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Lkc-LK-udY" id="NJH-CA-5Gg">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="41"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" text="FancyHeader" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WKe-je-XLO">
+                                            <rect key="frame" x="8" y="7" width="140" height="30"/>
+                                            <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="24"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="WKe-je-XLO" firstAttribute="centerY" secondItem="NJH-CA-5Gg" secondAttribute="centerY" constant="1" id="7yr-ux-Z4U"/>
+                                        <constraint firstItem="WKe-je-XLO" firstAttribute="leading" secondItem="NJH-CA-5Gg" secondAttribute="leading" constant="8" id="Ewe-a8-gDW"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="sectionHeader" destination="WKe-je-XLO" id="0gz-Ti-fAT"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -336,6 +355,7 @@
                             <outlet property="delegate" destination="bZg-xl-9v9" id="URL-zg-qb2"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="FO8-zL-tqI"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ov-gq-8tn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

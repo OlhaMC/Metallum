@@ -19,7 +19,10 @@ final class DetailedInfoViewController: UITableViewController {
         super.viewDidLoad()
         
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.sectionHeaderHeight = UITableViewAutomaticDimension
+        tableView.estimatedSectionHeaderHeight = 18.0
         tableView.estimatedRowHeight = 44.0
+        title = band.name
     }
     
     override func didReceiveMemoryWarning() {
@@ -70,8 +73,9 @@ final class DetailedInfoViewController: UITableViewController {
     func configureMemberTableViewCell(cell: MemberTableViewCell, atIndexPath: NSIndexPath) {
         let member = band.members[atIndexPath.row]
         cell.fullName.text = "\(member.firstName) \"\(member.nickName)\" \(member.lastName)"
-        let defaultDate = NSDate()
-        if defaultDate.isEqualToDate(member.birthDate) {
+
+        let calendar = NSCalendar.currentCalendar()
+        if calendar.isDateInToday(member.birthDate) {
             cell.birthDay.text = "N/A"
         } else {
             let dateFormatter = NSDateFormatter()
@@ -86,5 +90,17 @@ final class DetailedInfoViewController: UITableViewController {
         cell.yearReleased.text = String(album.releaseYear)
     }
     
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let cell = tableView.dequeueReusableCellWithIdentifier(String(SectionHeaderTableViewCell)) as! SectionHeaderTableViewCell
+        
+        switch section {
+            case 0: cell.sectionHeader.text = "Info"
+            case 1: cell.sectionHeader.text = "Members"
+            case 2: cell.sectionHeader.text = "Albums"
+            default: cell.sectionHeader.text = ""
+        }
+        
+        return cell
+    }
 
 }
